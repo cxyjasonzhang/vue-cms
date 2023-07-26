@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import './style.css'
+import 'normalize.css'
 import App from './App.vue'
 import router from '@/router'
 import { createPinia } from 'pinia'
@@ -17,25 +18,25 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
 // 测试请求
-import hyRequest from './service'
+// import hyRequest from './service'
 
-interface DataType {
-  message: string
-  status: string
-}
+// interface DataType {
+//   message: string
+//   status: string
+// }
 
-hyRequest
-  .request<DataType>({
-    url: '/image/random',
-    method: 'GET',
-    showLoading: true
-  })
-  .then((res) => {
-    console.log(res)
-  })
-  .catch((err) => {
-    console.log(err)
-  })
+// hyRequest
+//   .request<DataType>({
+//     url: '/image/random',
+//     method: 'GET',
+//     showLoading: true
+//   })
+//   .then((res) => {
+//     console.log(res)
+//   })
+//   .catch((err) => {
+//     console.log(err)
+//   })
 
 const pinia = createPinia()
 

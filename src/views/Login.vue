@@ -1,13 +1,5 @@
-<template>
-  <div>登录页</div>
-  <el-button type="primary">登录</el-button>
-  <el-icon :size="20" :color="color">
-    <Edit />
-  </el-icon>
-</template>
+<template></template>
 
-<script setup lang="ts">
-const color = '#000'
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>

@@ -220,4 +220,73 @@ VITE_APP_BASEURL = 'xxxxx'
 
 
 
-项目中eslint不失效是什么问题
+项目中eslint失效是什么问题？
+
+
+
+`.browserslistrc` 文件
+
+```js
+> 1%
+last 2 versions
+not dead
+```
+
+`tsconfig.json` 文件？ -- ts的配置文件
+
+```json
+
+```
+
+
+
+
+
+项目开始：
+
+初始化css样式: 
+
+```shell
+// 可以安装normalize.css 然后在main.ts中引入
+npm install normalize.css
+import 'normalize.css'
+```
+
+在项目中使用less：
+
+```shell
+npm install less -D
+// 在vite.config.js中配置
+   css: {
+      preprocessorOptions: {
+          less: {
+              modifyVars: {
+                  hack: `true; @import (reference) "${resolve("src/assets/less/index.less")}";`,
+              },
+              javascriptEnabled: true,
+          },
+      },
+    },
+
+```
+
+```
+  // 配置2
+  css: {
+    preprocessorOptions: {
+      less: {
+        // 可以为每个样式内容注入额外代码，请注意，如果注入的是实际的样式而不仅仅是变量时，那么这些样式将会在最终的打包产物中重复出现。
+      	additionalData: `@import "@/assets/base.less";`,
+        math: 'always', // 可以做数学计算
+        javascriptEnabled: true,
+        // 配置全局变量
+        globalVars: {
+          'primary-color': '#1890ff'
+        }
+      }
+    }
+  }
+```
+
+![1690338785925](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1690338785925.png)
+

@@ -36,5 +36,16 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, 'src')
     }
+  },
+  css: {
+    preprocessorOptions: {
+      less: {
+        math: 'always',
+        javascriptEnabled: true,
+        globalVars: {
+          'primary-color': '#1890ff'
+        }
+      }
+    }
   }
 })

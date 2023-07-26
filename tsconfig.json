@@ -1,8 +1,12 @@
 {
+  /* 编译选项 */
   "compilerOptions": {
+    /* 编译选项 */
     "target": "ES2020",
     "useDefineForClassFields": true,
+    /* 目标代码要使用的模块化方案 */
     "module": "ESNext",
+    /* 可以指定在项目中可以使用哪些库的类型 */
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
 
@@ -20,10 +24,12 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "./",
+    /* 路径解析 */
     "paths": {
       "@/*": ["*", "src/*"]
     }
   },
+  /* 哪些代码使用ts解析 */
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
