@@ -1,16 +1,18 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useLoginStore } from '@/store/loginStore'
+const store = useLoginStore()
+store.initLocalData()
+</script>
 
 <template>
-  <div>
-    <div class="test"></div>
-    <router-link to="/login">登录</router-link>
+  <div class="container">
+    <router-view></router-view>
   </div>
 </template>
 
 <style scoped lang="less">
-.test {
-  width: 100px;
-  height: 100px;
-  background-color: saddlebrown;
+.container {
+  width: 100%;
+  height: 100%;
 }
 </style>

@@ -4,6 +4,7 @@ import type { HYRequestInterceptors, HYRequestConfig } from './type'
 // element-plus 的加载组件
 import { ElLoading } from 'element-plus'
 import type { LoadingInstance } from 'element-plus/lib/components/loading/src/loading'
+import LocalCache from '@/utils/cache'
 
 const DEFAULT_LOADING = true
 
@@ -18,13 +19,13 @@ class HYRequest {
     this.interceptors = config.interceptors
     this.showLoading = config.showLoading ?? DEFAULT_LOADING
 
-    // 请求拦截器
+    // 请求拦截器（自定义）
     this.instance.interceptors.request.use(
       this.interceptors?.requestInterceptor,
       this.interceptors?.requestInterceptorCatch
     )
 
-    // 响应拦截器
+    // 响应拦截器 （自定义）
     this.instance.interceptors.response.use(
       this.interceptors?.responseInterceptor,
       this.interceptors?.responseInterceptorCatch
@@ -33,7 +34,7 @@ class HYRequest {
     // 添加所有实例都有的拦截器
     this.instance.interceptors.request.use(
       (config) => {
-        const token = ''
+        const token = LocalCache.getCache('token')
         if (token) {
           config.headers.Authorization = `Bearer ${token}`
         }
@@ -55,11 +56,10 @@ class HYRequest {
 
     this.instance.interceptors.response.use(
       (res) => {
-        console.log('所有实例都有的拦截器：响应成功拦截')
         // 关闭loading
         this.loadingInstance?.close()
         const data = res.data
-        if (data.code === 0) {
+        if (data.code !== 0) {
           console.log('响应失败')
         } else {
           // 将具体的信息返回出去

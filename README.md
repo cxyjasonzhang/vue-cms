@@ -290,3 +290,54 @@ npm install less -D
 
 ![1690338785925](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1690338785925.png)
 
+#### 在vite中如何配置，才能自动识别文件（.ts .js .vue等文件）
+
+
+
+
+
+
+
+![1690354144261](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1690354144261.png)
+
+vue3+ts拿到组件的类型： 
+
+![1690377148058](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1690377148058.png)
+
+```
+适用于 defineComponent 
+const account = ref<InstanceType<typeof loginAccount>>()
+loginAccount组件导出的是一个对象，根据组件描述，创建组件实例（跟类很像）
+<script setup lang="ts"><script /> 中的写法
+```
+
+
+
+#### 关于登录逻辑：因为有账号登录和手机登录（这是不同的两个组件）？
+
+其登录逻辑写在各自组件中便于维护，由外部登录页面通过在组件上绑定ref，拿到各自组件的ref实例去调用里面的登录方法。
+
+
+
+#### vue3+ts项目中使用 pinia 管理数据
+
+> pinia中如何分模块？
+>
+> 
+>
+> pinia中如何添加泛型？
+
+vite.config.ts 中配置代理跨域及其原理
+
+
+
+
+
+关于以下这个警告的解决：
+![1690786021684](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1690786021684.png)
+
+> 报该警告的原因是： 在store的定义文件中 引入 `import { useRouter } from vue-router` 但 useRouter 只能在setup中使用
+>
+> 解决:  `import router from '@/router/index`  直接从vue-router定义文件中引入 router 
+>
+> 使用 useStore 同理

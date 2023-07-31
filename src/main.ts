@@ -17,26 +17,6 @@ const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
-// 测试请求
-// import hyRequest from './service'
-
-// interface DataType {
-//   message: string
-//   status: string
-// }
-
-// hyRequest
-//   .request<DataType>({
-//     url: '/image/random',
-//     method: 'GET',
-//     showLoading: true
-//   })
-//   .then((res) => {
-//     console.log(res)
-//   })
-//   .catch((err) => {
-//     console.log(err)
-//   })
 
 const pinia = createPinia()
 
