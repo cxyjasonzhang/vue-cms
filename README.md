@@ -341,3 +341,35 @@ vite.config.ts 中配置代理跨域及其原理
 > 解决:  `import router from '@/router/index`  直接从vue-router定义文件中引入 router 
 >
 > 使用 useStore 同理
+
+#### 主页面搭建
+
+关于 element-plus 中图标的动态引入
+
+```
+<el-icon v-if="item.icon">
+   <component :is="parseIconName(item.icon)"></component>
+</el-icon>
+```
+
+在vue3中使用样式穿透的方式不一样
+
+```less
+<style lang="less" scoped>
+  :deep(.title3){
+    background-color:antiquewhite;
+  }
+</style>
+```
+
+关于如何通过设置`css变量`来覆盖`element-plus`中的样式
+
+![1690872367999](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1690872367999.png)
+
+> 首先新建一个 `element-variables.less`
+
+后台管理权限控制的思路：RBAC
+
+登录 - 用户信息 -菜单信息
+
+不同角色用户注册不同的路由：动态加载数组 （前端规定好不同角色的路由数组） 弊端: 新增角色需要修改前端代码，然后重新部署

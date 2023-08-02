@@ -4,6 +4,7 @@ import { accountLoginRequest, requestUserInfoById, requestUserMenusByRoleId } fr
 import { LoginPayloadType } from '@/service/login/type'
 import router from '@/router/index'
 import LocalCache from '@/utils/cache'
+import { mapMenusToRoutes } from '@/utils/map-menu'
 
 export const useLoginStore = defineStore('login', {
   state: (): LoginStateType => {
@@ -41,6 +42,17 @@ export const useLoginStore = defineStore('login', {
       this.token = LocalCache.getCache('token') || ''
       this.userInfo = LocalCache.getCache('userInfo') || {}
       this.userMenus = LocalCache.getCache('userMenus') || []
+      console.log(mapMenusToRoutes(this.userMenus))
+      const routes = mapMenusToRoutes(this.userMenus)
+      routes.forEach((route) => {
+        router.addRoute('main', route)
+      })
+      console.log(router.getRoutes(), 'router.getRoutes()')
+    },
+    exitCountAction() {
+      this.token = ''
+      LocalCache.deleteCache('token')
+      router.push('/login')
     }
   }
 })
