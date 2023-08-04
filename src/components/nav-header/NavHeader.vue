@@ -1,11 +1,13 @@
 <template>
   <div class="header-container">
-    <div class="switch">
+    <div class="header-left">
       <el-switch v-model="isFold" @change="clickSwitch"></el-switch>
-      <div class="bread"></div>
+      <div class="bread">
+        <bread-crumb :bread-crumbs="crumb"></bread-crumb>
+      </div>
     </div>
     <div class="header-right">
-      <el-dropdown @command="handleCommand">
+      <el-dropdown>
         <span class="el-dropdown-link dropdown">
           <el-avatar :size="30" :src="circleUrl" />
           <span class="userName">{{ loginStore.userInfo.name }}</span>
@@ -33,16 +35,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useLoginStore } from '@/store/loginStore'
+import { breadCrumb } from '@/baseUI/breadCrumb'
+import { ref, computed } from 'vue'
+import { useLoginStore } from '@/store/login/loginStore'
+import { useRoute } from 'vue-router'
+import { pathMapBreadCrumb } from '@/utils/map-menu'
+
 const loginStore = useLoginStore()
+const route = useRoute()
 const circleUrl = ref('https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png')
 const emits = defineEmits(['handleSwitch'])
 const isFold = ref(false)
 const clickSwitch = (state: boolean) => {
   emits('handleSwitch', state)
 }
-const handleCommand = () => {}
+
+const crumb = computed(() => {
+  const currentPath = route.path
+  return pathMapBreadCrumb(loginStore.userMenus, currentPath)
+})
 // 退出登录
 const handleExitClick = () => {
   loginStore.exitCountAction()
@@ -55,6 +66,13 @@ const handleExitClick = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .header-left {
+    display: flex;
+    align-items: center;
+    .bread {
+      margin-left: 15px;
+    }
+  }
   .dropdown {
     display: flex;
     align-items: center;
@@ -67,3 +85,4 @@ const handleExitClick = () => {
   }
 }
 </style>
+@/src/store/login/loginStore

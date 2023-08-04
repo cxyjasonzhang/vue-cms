@@ -1,8 +1,4 @@
-<script setup lang="ts">
-import { useLoginStore } from '@/store/loginStore'
-const store = useLoginStore()
-store.initLocalData()
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div>

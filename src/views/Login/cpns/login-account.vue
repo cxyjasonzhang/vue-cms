@@ -25,7 +25,7 @@ import LocalCache from '@/utils/cache'
 // 将验证规则抽离出去
 import { rules } from '../config/account-config.ts'
 // 导入pinia
-import { useLoginStore } from '@/store/loginStore'
+import { useLoginStore } from '@/store/login/loginStore'
 
 const loginStore = useLoginStore()
 
@@ -80,3 +80,4 @@ defineExpose({
 </script>
 
 <style lang="less" scoped></style>
+@/src/store/login/loginStore.ts

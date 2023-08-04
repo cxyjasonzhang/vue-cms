@@ -4,6 +4,7 @@ import 'normalize.css'
 import App from './App.vue'
 import router from '@/router'
 import { createPinia } from 'pinia'
+import { useLoginStore } from '@/store/login/loginStore'
 
 // import '@/service/axios-demo'
 // 全局引入element-plus
@@ -21,5 +22,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 const pinia = createPinia()
 
 app.use(pinia)
+const store = useLoginStore()
+store.initLocalData()
 app.use(router)
 app.mount('#app')

@@ -373,3 +373,30 @@ vite.config.ts 中配置代理跨域及其原理
 登录 - 用户信息 -菜单信息
 
 不同角色用户注册不同的路由：动态加载数组 （前端规定好不同角色的路由数组） 弊端: 新增角色需要修改前端代码，然后重新部署
+
+vue中 `PropType`的作用？  用于在用运行时 props 声明时给一个 prop 标注更复杂的类型定义。
+
+`import { PropType } from 'vue'`
+
+```vue
+<script setup lang="ts">
+import { PropType } from 'vue'
+import { IFormItem } from '../type'
+defineProps({
+  formItems: {
+    type: Array as PropType<IFormItem[]>,
+    default: () => []
+  }
+})
+</script>
+```
+
+关于页面刷新匹配(跳转)到notfound页面  
+
+![1691029693503](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1691029693503.png)
+
+默认选中：menu列表   defauli-active 的值如何设置？
+
+
+
+单向数据流原则：

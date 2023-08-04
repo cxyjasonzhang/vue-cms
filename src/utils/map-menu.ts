@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
+import { IBreadCrumb } from '@/baseUI/breadCrumb/type'
 
 export function loadLocalRoutes(): RouteRecordRaw[] {
   // 1. 先去加载默认的所有routes
@@ -38,4 +39,26 @@ export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
     }
   }
   return routes
+}
+
+export function pathMapBreadCrumb(userMenus: any[], currentPath: string) {
+  const breadcrumbs: IBreadCrumb[] = []
+  mapPathToMenu(userMenus, currentPath, breadcrumbs)
+  return breadcrumbs
+}
+
+export function mapPathToMenu(menus: any[], currentPath: string, breadCrumbs?: IBreadCrumb[]): any {
+  for (const menu of menus) {
+    if (menu.type === 1) {
+      const findMenu = mapPathToMenu(menu.children ?? [], currentPath)
+      if (findMenu) {
+        breadCrumbs?.push({ title: menu.name, path: menu.url })
+        breadCrumbs?.push({ title: findMenu.name, path: findMenu.url })
+        return findMenu
+      }
+    } else if (menu.type === 2 && menu.url === currentPath) {
+      return menu
+    }
+  }
+  return breadCrumbs
 }
