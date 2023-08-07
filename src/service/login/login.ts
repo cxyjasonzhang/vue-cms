@@ -11,7 +11,7 @@ enum LoginAPI {
 // 账号登录请求
 export function accountLoginRequest(payload: LoginPayloadType) {
   return hyRequest.post<IDataType<LoginResultDataType>>({
-    url: '/login',
+    url: LoginAPI.AccountLogin,
     data: payload
   })
 }

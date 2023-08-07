@@ -1,37 +1,27 @@
 <template>
   <div class="user">
-    <page-search :searchConfig="searchFormConfig"></page-search>
-    <div class="table-wrap">
-      <hy-table :tableColumnsConfig="tableColumnsConfig" :tableData="tableData">
-        <template #status="scope">
-          <span>{{ scope.row.enable ? '启用' : '禁用' }}</span>
-        </template>
-      </hy-table>
-    </div>
+    <page-search
+      :searchConfig="searchFormConfig"
+      @handler-search-click="handlerSearchClick"
+      @handler-reset-click="handlerResetClick"
+    ></page-search>
+    <page-content :pageContentConfig="pageContentConfig" pageName="user" ref="pageContentRef"></page-content>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { ref } from 'vue'
 import PageSearch from '@/components/page-search'
-import hyTable from '@/baseUI/table'
-import { searchFormConfig, tableColumnsConfig } from './config'
-import { useSystemStore } from '@/store/main/system/system'
-const systemStore = useSystemStore()
-systemStore.getPageListAction({
-  pageUrl: 'users/list',
-  queryInfo: {
-    offset: 1,
-    size: 10
-  }
-})
-const tableData = computed(() => {
-  return systemStore.userList
-})
+import PageContent from '@/components/page-content'
+import { searchFormConfig, pageContentConfig } from './config'
+
+const pageContentRef = ref<InstanceType<typeof PageContent> | null>(null)
+const handlerSearchClick = (payload: any) => {
+  pageContentRef.value?.getPageData(payload)
+}
+const handlerResetClick = () => {
+  pageContentRef.value?.getPageData()
+}
 </script>
 
-<style lang="less" scoped>
-.table-wrap {
-  padding: 40px 30px 0 40px;
-}
-</style>
+<style lang="less" scoped></style>

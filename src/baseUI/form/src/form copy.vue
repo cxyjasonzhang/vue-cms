@@ -8,17 +8,12 @@
           <el-col v-bind="colLayout">
             <el-form-item :label="formItem.label" :rules="formItem.rules" :style="itemStyle">
               <template v-if="formItem.type === 'input'">
-                <el-input
-                  :placeholder="formItem.placeholder"
-                  :model-value="modelValue[`${formItem.field}`]"
-                  @update:modelValue="handlerValueChange($event, formItem.field)"
-                />
+                <el-input :placeholder="formItem.placeholder" v-model="formData[`${formItem.field}`]" />
               </template>
               <template v-else-if="formItem.type === 'select'">
                 <el-select
                   :placeholder="formItem.placeholder"
-                  :model-value="modelValue[`${formItem.field}`]"
-                  @update:modelValue="handlerValueChange($event, formItem.field)"
+                  v-model="formData[`${formItem.field}`]"
                   style="width: 100%"
                 >
                   <el-option
@@ -32,8 +27,7 @@
               <template v-else-if="formItem.type === 'password'">
                 <el-input
                   type="password"
-                  :model-value="modelValue[`${formItem.field}`]"
-                  @update:modelValue="handlerValueChange($event, formItem.field)"
+                  v-model="formData[`${formItem.field}`]"
                   :placeholder="formItem.placeholder"
                   show-password
                 ></el-input>
@@ -41,8 +35,7 @@
               <template v-else-if="formItem.type === 'datePicker'">
                 <el-date-picker
                   type="date"
-                  :model-value="modelValue[`${formItem.field}`]"
-                  @update:modelValue="handlerValueChange($event, formItem.field)"
+                  v-model="formData[`${formItem.field}`]"
                   :placeholder="formItem.placeholder"
                   style="width: 100%"
                 />
@@ -57,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-// import { ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { PropType } from 'vue'
 import { IFormItem } from '../type'
 const props = defineProps({
@@ -89,20 +82,15 @@ const props = defineProps({
   }
 })
 const emits = defineEmits(['update:modelValue'])
-// const formData = ref({ ...props.modelValue })
-// watch(
-//   formData,
-//   (newVal) => {
-//     console.log(newVal)
-//     emits('update:modelValue', newVal)
-//   },
-//   { deep: true }
-// )
-const handlerValueChange = (value: any, field: string) => {
-  console.log({ ...props.modelValue }, { ...props.modelValue, [field]: value })
-
-  emits('update:modelValue', { ...props.modelValue, [field]: value })
-}
+const formData = ref({ ...props.modelValue })
+watch(
+  formData,
+  (newVal) => {
+    console.log(newVal)
+    emits('update:modelValue', newVal)
+  },
+  { deep: true }
+)
 </script>
 
 <style lang="less" scoped></style>

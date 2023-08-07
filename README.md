@@ -400,3 +400,42 @@ defineProps({
 
 
 单向数据流原则：
+
+vue3中添加全局方法： 
+
+```
+app.config.globalProperties.$filter = {
+	foo() {
+	  console.log('foo')
+	},
+	formatTime() {
+	
+	}
+}
+```
+
+关于vue3+typescript项目中导入dayjs
+
+```typescript
+import * as dayjs from 'dayjs'
+import * as utc from 'dayjs/plugin/utc'
+
+dayjs.extend(utc)
+const DEFAULT_FORMAT = 'YYYY-MM-DD HH:mm:ss'
+
+export function formatUTCDate(utcString: string, format: string = DEFAULT_FORMAT) {
+  return dayjs.utc(utcString).format(format)
+}
+```
+
+请求table数据时存在state中，再从getter中取数据，数据没能及时拿到（请求是异步的）
+
+关于 form 组件与page-search进行数据双向绑定时，在page-search清空数据，form组件内部数据不发生修改的问题，
+
+@update:modelValue 是什么函数
+
+关于组件ref的定义与使用
+
+![1691396907008](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1691396907008.png)
+
+![1691401935946](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1691401935946.png)
