@@ -6,7 +6,13 @@
         <slot name="headerHandler"></slot>
       </div>
     </div>
-    <el-table :data="tableData" style="width: 100%" border :show-overflow-tooltip="true">
+    <el-table
+      :data="tableData"
+      style="width: 100%"
+      border
+      :show-overflow-tooltip="true"
+      v-bind="childrenProps"
+    >
       <el-table-column v-if="showSelectColumn" width="60" type="selection" align="center"></el-table-column>
       <el-table-column
         v-if="showIndexColumn"
@@ -26,7 +32,7 @@
         </el-table-column>
       </template>
     </el-table>
-    <div class="footer">
+    <div class="footer" v-if="showFooter">
       <slot name="footer">
         <el-pagination
           v-model:current-page="page.currentPage"
@@ -74,6 +80,14 @@ const props = defineProps({
   page: {
     type: Object,
     default: () => ({ currentPage: 1, pagesize: 10 })
+  },
+  childrenProps: {
+    type: Object,
+    default: () => ({})
+  },
+  showFooter: {
+    type: Boolean,
+    default: true
   }
 })
 

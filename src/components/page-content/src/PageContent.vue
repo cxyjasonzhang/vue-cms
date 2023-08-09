@@ -7,7 +7,7 @@
       :total-page="pageCount"
     >
       <template #headerHandler>
-        <el-button type="primary" size="medium">新增用户</el-button>
+        <el-button type="primary" size="default" v-if="isCreate">新增用户</el-button>
       </template>
       <template #status="scope">
         <el-button :type="scope.row.enable ? 'success' : 'danger'">{{
@@ -21,8 +21,8 @@
         <span>{{ formatUTCDate(scope.row.updateAt) }}</span>
       </template>
       <template #handle>
-        <el-button type="primary" link :icon="Edit">编辑</el-button>
-        <el-button type="primary" link :icon="Delete">删除</el-button>
+        <el-button type="primary" link :icon="Edit" v-if="isUpdate">编辑</el-button>
+        <el-button type="primary" link :icon="Delete" v-if="isDelete">删除</el-button>
       </template>
       <!-- 在page-content中动态插入剩余的插槽 -->
       <template v-for="item in otherPropSlots" :key="item.prop" #[item.slotName]="scope">
@@ -39,8 +39,9 @@ import { PropType, computed, ref, watch } from 'vue'
 import hyTable from '@/baseUI/table'
 import { Delete, Edit } from '@element-plus/icons-vue'
 import { formatUTCDate } from '@/utils/format'
+import { usePermission } from '@/hooks/usePermission'
 import { useSystemStore } from '@/store/main/system/system'
-import { type PageName } from '@/store/type'
+import { type PageName } from '@/store/main/system/types'
 import { ITableData } from '@/baseUI/table/type'
 
 const props = defineProps({
@@ -53,16 +54,15 @@ const props = defineProps({
     required: true
   }
 })
-
-const paginationInfo = ref({
-  currentPage: 1,
-  pagesize: 10
-})
-
 // 其他特殊插槽
 const otherPropSlots = props.pageContentConfig.tableColumnsConfig.filter((item) => {
   if (item.slotName) {
-    if (item.slotName === 'status' || item.slotName === 'createTime' || item.slotName === 'updateTime') {
+    if (
+      item.slotName === 'status' ||
+      item.slotName === 'createTime' ||
+      item.slotName === 'updateTime' ||
+      item.slotName === 'handle'
+    ) {
       return false
     } else {
       return true
@@ -72,6 +72,17 @@ const otherPropSlots = props.pageContentConfig.tableColumnsConfig.filter((item) 
   }
 })
 
+// 获取按钮操作权限
+const isCreate = usePermission(props.pageName, 'create')
+const isUpdate = usePermission(props.pageName, 'update')
+const isQuery = usePermission(props.pageName, 'query')
+const isDelete = usePermission(props.pageName, 'delete')
+
+const paginationInfo = ref({
+  currentPage: 1,
+  pagesize: 10
+})
+
 watch(paginationInfo, () => {
   getPageData()
 })
@@ -79,14 +90,17 @@ watch(paginationInfo, () => {
 const systemStore = useSystemStore()
 // 请求表单数据
 const getPageData = (payload: any = {}) => {
-  systemStore.getPageListAction({
-    pageName: props.pageName,
-    queryInfo: {
-      offset: (paginationInfo.value.currentPage - 1) * paginationInfo.value.pagesize,
-      size: paginationInfo.value.pagesize,
-      ...payload
-    }
-  })
+  // 没有查询权限就不请求数据
+  if (isQuery) {
+    systemStore.getPageListAction({
+      pageName: props.pageName,
+      queryInfo: {
+        offset: (paginationInfo.value.currentPage - 1) * paginationInfo.value.pagesize,
+        size: paginationInfo.value.pagesize,
+        ...payload
+      }
+    })
+  }
 }
 getPageData()
 

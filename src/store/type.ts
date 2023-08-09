@@ -2,6 +2,7 @@ export interface LoginStateType {
   token: string
   userInfo: any
   userMenus: any
+  userPermissions: any[]
 }
 
 // export interface UserProps {
@@ -9,7 +10,7 @@ export interface LoginStateType {
 //   account: string
 //   password: string
 // }
-export type PageName = 'user' | 'role' | 'goods'
+export type PageName = 'user' | 'role' | 'goods' | 'menu'
 
 export interface IListPayLoad<T> {
   pageName: T

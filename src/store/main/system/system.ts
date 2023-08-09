@@ -5,12 +5,14 @@ import { getPageList } from '@/service/main/system/system'
 export const useSystemStore = defineStore('system', {
   state: (): ISystemState => {
     return {
-      userList: [],
-      userCount: 0,
+      usersList: [],
+      usersCount: 0,
       roleList: [],
       roleCount: 0,
       goodsList: [],
-      goodsCount: 0
+      goodsCount: 0,
+      menuList: [],
+      menuCount: 0
     }
   },
 
@@ -18,12 +20,14 @@ export const useSystemStore = defineStore('system', {
     pageListGetter() {
       return (pageName: string) => {
         switch (pageName) {
-          case 'user':
-            return this.userList
+          case 'users':
+            return this.usersList
           case 'role':
             return this.roleList
           case 'goods':
             return this.goodsList
+          case 'menu':
+            return this.menuList
         }
       }
     },
@@ -31,11 +35,13 @@ export const useSystemStore = defineStore('system', {
       return (pageName: string) => {
         switch (pageName) {
           case 'user':
-            return this.userCount
+            return this.usersCount
           case 'role':
             return this.roleCount
           case 'goods':
             return this.goodsCount
+          case 'menu':
+            return this.menuCount
         }
       }
     }
@@ -45,7 +51,7 @@ export const useSystemStore = defineStore('system', {
     async getPageListAction(payload: IListPayLoad) {
       let requestUrl = ''
       switch (payload.pageName) {
-        case 'user':
+        case 'users':
           requestUrl = '/users/list'
           break
         case 'role':
@@ -54,6 +60,8 @@ export const useSystemStore = defineStore('system', {
         case 'goods':
           requestUrl = '/goods/list'
           break
+        case 'menu':
+          requestUrl = '/menu/list'
       }
       const resultData = await getPageList(requestUrl, payload.queryInfo)
       this[`${payload.pageName}List`] = resultData.data.list

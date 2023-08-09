@@ -5,7 +5,7 @@
       @handler-search-click="handlerSearchClick"
       @handler-reset-click="handlerResetClick"
     ></page-search>
-    <page-content :pageContentConfig="pageContentConfig" pageName="user" ref="pageContentRef"></page-content>
+    <page-content :pageContentConfig="pageContentConfig" pageName="users" ref="pageContentRef"></page-content>
   </div>
 </template>
 

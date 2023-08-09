@@ -4,14 +4,15 @@ import { accountLoginRequest, requestUserInfoById, requestUserMenusByRoleId } fr
 import { LoginPayloadType } from '@/service/login/types'
 import router from '@/router/index'
 import LocalCache from '@/utils/cache'
-import { mapMenusToRoutes } from '@/utils/map-menu'
+import { mapMenusToRoutes, mapMenusPermission } from '@/utils/map-menu'
 
 export const useLoginStore = defineStore('login', {
   state: (): LoginStateType => {
     return {
       token: '',
       userInfo: {},
-      userMenus: []
+      userMenus: [],
+      userPermissions: []
     }
   },
 
@@ -46,6 +47,9 @@ export const useLoginStore = defineStore('login', {
       routes.forEach((route) => {
         router.addRoute('main', route)
       })
+      // 获取当前用户所有按钮权限
+      console.log(mapMenusPermission(this.userMenus))
+      this.userPermissions = mapMenusPermission(this.userMenus)
     },
     exitCountAction() {
       this.token = ''

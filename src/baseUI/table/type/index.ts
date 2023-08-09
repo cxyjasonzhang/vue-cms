@@ -10,4 +10,6 @@ export interface ITableData {
   showTableIndexColumn?: boolean
   showSelectColumn?: boolean
   tableName?: string
+  childrenProps?: any
+  showFooter?: boolean
 }

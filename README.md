@@ -461,3 +461,17 @@ export function formatUTCDate(utcString: string, format: string = DEFAULT_FORMAT
 
 关于PageContent组件中的插槽不能写死？（不能灵活配置）
 
+ 跨组件插槽，
+
+将所有请求表单数据的 store state存储到system中
+
+
+
+嵌套表格 default-expand-all
+
+关于按钮权限的控制？
+
+根据菜单列表：3级菜单是按钮菜单 --- 1. 先取到所有的按钮权限，将其放进数组里面（在PageContent.vue组件中进行判断<封装一个hooks来进行判断>）
+
+coder
+
