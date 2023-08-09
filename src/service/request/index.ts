@@ -1,9 +1,6 @@
 import axios from 'axios'
 import type { AxiosInstance } from 'axios'
 import type { HYRequestInterceptors, HYRequestConfig } from './type'
-// element-plus 的加载组件
-import { ElLoading } from 'element-plus'
-import type { LoadingInstance } from 'element-plus/lib/components/loading/src/loading'
 import LocalCache from '@/utils/cache'
 
 const DEFAULT_LOADING = true
@@ -11,7 +8,6 @@ const DEFAULT_LOADING = true
 class HYRequest {
   instance: AxiosInstance
   interceptors?: HYRequestInterceptors
-  loadingInstance?: LoadingInstance
   showLoading: boolean
 
   constructor(config: HYRequestConfig) {
@@ -40,12 +36,8 @@ class HYRequest {
         }
         console.log('请求拦截成功')
         if (this.showLoading) {
-          this.loadingInstance = ElLoading.service({
-            lock: true,
-            text: '正在加載中...',
-            background: 'rgba(0,0,0,.5)',
-            fullscreen: true
-          })
+          // 设置加载效果
+          console.log('到时整改为另外一种方案')
         }
         return config
       },
@@ -57,7 +49,6 @@ class HYRequest {
     this.instance.interceptors.response.use(
       (res) => {
         // 关闭loading
-        this.loadingInstance?.close()
         const data = res.data
         if (data.code !== 0) {
           console.log('响应失败')
@@ -68,7 +59,6 @@ class HYRequest {
       },
       (err) => {
         console.log('失败响应拦截器')
-        this.loadingInstance?.close()
         if (err.response.status === 401) {
           console.log('token失效')
         }

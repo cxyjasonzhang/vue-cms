@@ -374,6 +374,25 @@ vite.config.ts 中配置代理跨域及其原理
 
 不同角色用户注册不同的路由：动态加载数组 （前端规定好不同角色的路由数组） 弊端: 新增角色需要修改前端代码，然后重新部署
 
+项目中动态路由配置： 
+
+1. 首先配置各个路由的配置
+
+   ```js
+   // 例如
+   const dashboard = () => import('@/views/main/analysis/dashboard/dashboard.vue')
+   export default {
+     path: '/main/analysis/dashboard',
+     name: 'dashboard',
+     component: dashboard,
+     children: []
+   }
+   ```
+
+2. 读取各个文件内容`const routeFiles: Record<string, any> = import.meta.glob('@/router/main/**/*.ts', { eager: true })` 放入一个数组中，称之为 routeFiles --->这是本地的所有路由
+
+3. 将userMenu转化为路由， userMenu是通过网络请求拿到的菜单(不同角色对应不同菜单)，
+
 vue中 `PropType`的作用？  用于在用运行时 props 声明时给一个 prop 标注更复杂的类型定义。
 
 `import { PropType } from 'vue'`
@@ -439,3 +458,6 @@ export function formatUTCDate(utcString: string, format: string = DEFAULT_FORMAT
 ![1691396907008](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1691396907008.png)
 
 ![1691401935946](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1691401935946.png)
+
+关于PageContent组件中的插槽不能写死？（不能灵活配置）
+

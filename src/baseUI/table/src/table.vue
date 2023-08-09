@@ -6,7 +6,7 @@
         <slot name="headerHandler"></slot>
       </div>
     </div>
-    <el-table :data="tableData" style="width: 100%" border>
+    <el-table :data="tableData" style="width: 100%" border :show-overflow-tooltip="true">
       <el-table-column v-if="showSelectColumn" width="60" type="selection" align="center"></el-table-column>
       <el-table-column
         v-if="showIndexColumn"
@@ -27,7 +27,18 @@
       </template>
     </el-table>
     <div class="footer">
-      <slot name="footer"></slot>
+      <slot name="footer">
+        <el-pagination
+          v-model:current-page="page.currentPage"
+          v-model:page-size="page.pagesize"
+          :page-sizes="[10, 20, 30]"
+          :small="false"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="totalPage"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+        />
+      </slot>
     </div>
   </div>
 </template>
@@ -35,7 +46,7 @@
 <script setup lang="ts">
 import { PropType } from 'vue'
 import { ITableColumns } from '../type'
-defineProps({
+const props = defineProps({
   tableData: {
     type: Array as PropType<any[]>,
     required: true
@@ -55,13 +66,25 @@ defineProps({
   tableName: {
     type: String,
     default: '用户列表'
+  },
+  totalPage: {
+    type: Number,
+    required: true
+  },
+  page: {
+    type: Object,
+    default: () => ({ currentPage: 1, pagesize: 10 })
   }
 })
-// const emits = defineEmits(['getSelectionData'])
-// const handleSelectionChange = (value: any) => {
-//   console.log(value, 'selection')
-//   emits('getSelectionData', value)
-// }
+
+const emits = defineEmits(['update:page'])
+
+const handleSizeChange = (size: number) => {
+  emits('update:page', { ...props.page, pagesize: size })
+}
+const handleCurrentChange = (currentPage: number) => {
+  emits('update:page', { ...props.page, currentPage })
+}
 </script>
 
 <style lang="less" scoped>

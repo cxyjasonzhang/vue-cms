@@ -33,6 +33,8 @@ export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
           })
         }
         routes.push(route)
+        console.log(routes, 'routes')
+
         // 记录第一个被匹配的菜单
         if (!firstMenu && route) firstMenu = subMenu
       }

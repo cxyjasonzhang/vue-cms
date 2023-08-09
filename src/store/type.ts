@@ -9,3 +9,12 @@ export interface LoginStateType {
 //   account: string
 //   password: string
 // }
+export type PageName = 'user' | 'role' | 'goods'
+
+export interface IListPayLoad<T> {
+  pageName: T
+  queryInfo: {
+    offset: number
+    size: number
+  }
+}

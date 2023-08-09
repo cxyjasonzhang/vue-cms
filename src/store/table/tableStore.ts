@@ -51,9 +51,6 @@ export const useSystemStore = defineStore('system', {
         case 'role':
           requestUrl = '/role/list'
           break
-        case 'goods':
-          requestUrl = '/goods/list'
-          break
       }
       const resultData = await getPageList(requestUrl, payload.queryInfo)
       this[`${payload.pageName}List`] = resultData.data.list
