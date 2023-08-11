@@ -3,11 +3,11 @@ import PageContent from '@/components/page-content'
 
 export function usePageSearch() {
   const pageContentRef = ref<InstanceType<typeof PageContent> | null>(null)
-  const handlerSearchClick = (payload: any) => {
+  const handleSearchClick = (payload: any) => {
     pageContentRef.value?.getPageData(payload)
   }
-  const handlerResetClick = () => {
+  const handleResetClick = () => {
     pageContentRef.value?.getPageData()
   }
-  return [pageContentRef, handlerSearchClick, handlerResetClick]
+  return { pageContentRef, handleSearchClick, handleResetClick }
 }

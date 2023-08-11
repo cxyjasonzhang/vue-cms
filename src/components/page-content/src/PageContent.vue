@@ -7,7 +7,7 @@
       :total-page="pageCount"
     >
       <template #headerHandler>
-        <el-button type="primary" size="default" v-if="isCreate">新增用户</el-button>
+        <el-button type="primary" size="default" v-if="isCreate" @click="handleCreate">新增用户</el-button>
       </template>
       <template #status="scope">
         <el-button :type="scope.row.enable ? 'success' : 'danger'">{{
@@ -20,9 +20,13 @@
       <template #updateTime="scope">
         <span>{{ formatUTCDate(scope.row.updateAt) }}</span>
       </template>
-      <template #handle>
-        <el-button type="primary" link :icon="Edit" v-if="isUpdate">编辑</el-button>
-        <el-button type="primary" link :icon="Delete" v-if="isDelete">删除</el-button>
+      <template #handle="scope">
+        <el-button type="primary" link :icon="Edit" v-if="isUpdate" @click="handleUpdate(scope.row)"
+          >编辑</el-button
+        >
+        <el-button type="primary" link :icon="Delete" v-if="isDelete" @click="handleDelete(scope.row)"
+          >删除</el-button
+        >
       </template>
       <!-- 在page-content中动态插入剩余的插槽 -->
       <template v-for="item in otherPropSlots" :key="item.prop" #[item.slotName]="scope">
@@ -87,7 +91,26 @@ watch(paginationInfo, () => {
   getPageData()
 })
 
+const emits = defineEmits(['handleCreateModal', 'handleEditModal'])
+
+// 新增、删除、编辑操作
+const handleCreate = () => {
+  // 去打开弹窗
+  emits('handleCreateModal')
+}
+
+const handleUpdate = (item: any) => {
+  emits('handleEditModal', item)
+}
+
 const systemStore = useSystemStore()
+const handleDelete = (item: any) => {
+  systemStore.deletePageItemAction({
+    pageName: props.pageName,
+    id: item.id
+  })
+}
+
 // 请求表单数据
 const getPageData = (payload: any = {}) => {
   // 没有查询权限就不请求数据

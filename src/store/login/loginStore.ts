@@ -5,6 +5,7 @@ import { LoginPayloadType } from '@/service/login/types'
 import router from '@/router/index'
 import LocalCache from '@/utils/cache'
 import { mapMenusToRoutes, mapMenusPermission } from '@/utils/map-menu'
+import { useRootStore } from '../root/rootStore'
 
 export const useLoginStore = defineStore('login', {
   state: (): LoginStateType => {
@@ -40,6 +41,7 @@ export const useLoginStore = defineStore('login', {
     phoneLoginAction() {},
     // 刷新页面时重新初始化pinia中的数据
     initLocalData() {
+      const rootStore = useRootStore()
       this.token = LocalCache.getCache('token') || ''
       this.userInfo = LocalCache.getCache('userInfo') || {}
       this.userMenus = LocalCache.getCache('userMenus') || []
@@ -49,6 +51,7 @@ export const useLoginStore = defineStore('login', {
       })
       // 获取当前用户所有按钮权限
       console.log(mapMenusPermission(this.userMenus))
+      rootStore.getInitDataAction()
       this.userPermissions = mapMenusPermission(this.userMenus)
     },
     exitCountAction() {

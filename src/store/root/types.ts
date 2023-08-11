@@ -1,10 +1,6 @@
-export interface ISystemState {
-  userList: any[]
-  userCount: number
-  roleList: any[]
-  roleCount: number
-  goodsList: any[]
-  goodsCount: number
+export interface IRootState {
+  entireDepartment: any[]
+  entireRole: any[]
 }
 
 export type PageName = 'user' | 'role' | 'goods'

@@ -17,3 +17,7 @@ export interface IListPayLoad {
     size: number
   }
 }
+export interface IDeletePayLoad {
+  pageName: PageName
+  id: number
+}

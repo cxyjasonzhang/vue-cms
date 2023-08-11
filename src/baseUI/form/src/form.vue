@@ -5,7 +5,7 @@
     <el-form :label-width="labelWidth">
       <el-row :gutter="20">
         <template v-for="formItem in formItems" :key="formItem.label">
-          <el-col v-bind="colLayout">
+          <el-col v-bind="colLayout" v-if="!formItem.isHidden">
             <el-form-item :label="formItem.label" :rules="formItem.rules" :style="itemStyle">
               <template v-if="formItem.type === 'input'">
                 <el-input
@@ -99,8 +99,6 @@ const emits = defineEmits(['update:modelValue'])
 //   { deep: true }
 // )
 const handlerValueChange = (value: any, field: string) => {
-  console.log({ ...props.modelValue }, { ...props.modelValue, [field]: value })
-
   emits('update:modelValue', { ...props.modelValue, [field]: value })
 }
 </script>

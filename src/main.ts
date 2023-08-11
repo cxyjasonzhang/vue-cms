@@ -22,7 +22,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 const pinia = createPinia()
 
 app.use(pinia)
-const store = useLoginStore()
-store.initLocalData()
+const loginStore = useLoginStore()
+loginStore.initLocalData()
 app.use(router)
 app.mount('#app')

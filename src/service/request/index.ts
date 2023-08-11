@@ -105,5 +105,13 @@ class HYRequest {
   post<T>(config: HYRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'POST' })
   }
+
+  delete<T>(config: HYRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'delete' })
+  }
+
+  patch<T>(config: HYRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'patch' })
+  }
 }
 export default HYRequest
