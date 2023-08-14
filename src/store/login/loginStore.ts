@@ -22,7 +22,6 @@ export const useLoginStore = defineStore('login', {
   actions: {
     async accountLoginAction(payload: LoginPayloadType) {
       const resultData = await accountLoginRequest(payload)
-      console.log(resultData, 'resultData')
       const { id, token } = resultData.data
       this.token = token
       LocalCache.setCache('token', token)
@@ -50,9 +49,8 @@ export const useLoginStore = defineStore('login', {
         router.addRoute('main', route)
       })
       // 获取当前用户所有按钮权限
-      console.log(mapMenusPermission(this.userMenus))
-      rootStore.getInitDataAction()
       this.userPermissions = mapMenusPermission(this.userMenus)
+      rootStore.getInitDataAction()
     },
     exitCountAction() {
       this.token = ''

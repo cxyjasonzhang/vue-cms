@@ -2,10 +2,11 @@
   <div class="page-model">
     <el-dialog v-model="dialogVisible" :title="modalTitle" width="30%" align-center :destroy-on-close="true">
       <hy-form v-bind="modalConfig" v-model="formData"></hy-form>
+      <slot></slot>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">取消</el-button>
-          <el-button type="primary" @click="handleCreateClick"> 新增 </el-button>
+          <el-button type="primary" @click="handleCreateClick"> 确定 </el-button>
         </span>
       </template>
     </el-dialog>
@@ -34,6 +35,9 @@ const props = defineProps({
   pageName: {
     type: String,
     required: true
+  },
+  otherInfo: {
+    type: Object
   }
 })
 
@@ -65,13 +69,13 @@ const handleCreateClick = () => {
     systemStore.updatePageItemAction({
       id,
       pageName: props.pageName,
-      newData: { ...formData.value }
+      newData: { ...formData.value, ...props.otherInfo }
     })
   } else {
     // 新建
     systemStore.createPageItemAction({
       pageName: props.pageName,
-      newData: { ...formData.value }
+      newData: { ...formData.value, ...props.otherInfo }
     })
   }
 }

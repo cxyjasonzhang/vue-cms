@@ -11,7 +11,6 @@ export function loadLocalRoutes(): RouteRecordRaw[] {
   for (const path in routeFiles) {
     localRoutes.push(routeFiles[path].default)
   }
-  console.log(localRoutes, 'localRoutes')
   return localRoutes
 }
 
@@ -78,4 +77,21 @@ export function mapMenusPermission(userMenus: any[]) {
   }
   _recursePermission(userMenus)
   return permissions
+}
+
+export function menuMapLeafKeys(menus: any[]) {
+  console.log(menus, 'menus')
+
+  const leafKeys: number[] = []
+  const _recurseGetLeaf = (menuList: any[]) => {
+    for (const menu of menuList) {
+      if (menu.children) {
+        _recurseGetLeaf(menu.children)
+      } else {
+        leafKeys.push(menu.id)
+      }
+    }
+  }
+  _recurseGetLeaf(menus)
+  return leafKeys
 }

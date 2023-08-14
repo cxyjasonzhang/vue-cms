@@ -48,8 +48,6 @@ const modalConfigRef = computed<types.IForm>(() => {
     return { label: item.name, value: item.id }
   })
 
-  console.log(roleOptions, departmentOptions, '****')
-
   const departmentItem = modalConfig.formItems.find((item) => item.field === 'departmentId')
   const roleItem = modalConfig.formItems.find((item) => item.field === 'roleId')
   if (departmentItem) {
@@ -58,7 +56,6 @@ const modalConfigRef = computed<types.IForm>(() => {
   if (roleItem) {
     roleItem.options = roleOptions
   }
-  console.log(modalConfig, 'ssss')
 
   return modalConfig
 })

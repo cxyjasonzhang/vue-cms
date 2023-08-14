@@ -7,7 +7,9 @@
       :total-page="pageCount"
     >
       <template #headerHandler>
-        <el-button type="primary" size="default" v-if="isCreate" @click="handleCreate">新增用户</el-button>
+        <el-button type="primary" size="default" v-if="isCreate" @click="handleCreate">{{
+          createButtonName
+        }}</el-button>
       </template>
       <template #status="scope">
         <el-button :type="scope.row.enable ? 'success' : 'danger'">{{
@@ -56,6 +58,10 @@ const props = defineProps({
   pageName: {
     type: String as PropType<PageName>,
     required: true
+  },
+  createButtonName: {
+    type: String,
+    default: '新增'
   }
 })
 // 其他特殊插槽

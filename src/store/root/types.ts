@@ -1,6 +1,7 @@
 export interface IRootState {
   entireDepartment: any[]
   entireRole: any[]
+  entireMenu: any[]
 }
 
 export type PageName = 'user' | 'role' | 'goods'
