@@ -56,7 +56,8 @@ const editCallback = (item: any) => {
   const keys = menuMapLeafKeys(item.menuList)
 
   nextTick(() => {
-    elTreeRef.value!.setCheckedKeys(keys, false)
+    // elTreeRef.value!.setCheckedKeys(keys, false)
+    elTreeRef.value && elTreeRef.value.setCheckedKeys(keys, false)
   })
 }
 

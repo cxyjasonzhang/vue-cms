@@ -1,6 +1,6 @@
 import hyRequest from '@/service/index'
-import { LoginPayloadType, LoginResultDataType } from './types'
-import { IDataType } from '@/service/types'
+import type { LoginPayloadType, LoginResultDataType } from './types'
+import type { IDataType } from '@/service/types'
 
 enum LoginAPI {
   AccountLogin = '/login',

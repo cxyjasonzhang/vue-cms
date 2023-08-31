@@ -485,5 +485,228 @@ hooks封装：
 
 ```
 
-控制formItem的显示和隐藏，
+控制formItem的显示和隐藏
+
+socket、轮询
+
+vue3+ts中指定计算属性的类型：
+
+```
+
+```
+
+时间间隔
+
+退出登录和登录逻辑
+
+
+
+关于部门数据和角色数据请求不到问题的处理：
+
+初始化数据时，确定拿到token才去请求部门数据和角色数据 --- 待改进
+
+今天不想跑，所以才去跑
+
+### echarts 图表的使用
+
+> 安装  `npm i echarts`
+>
+> 封装 echart 组件
+>
+> ```
+> import { ref } from 'vue'
+> 
+> ```
+>
+> ````ts
+> // ts中设置props
+> const props = withDefaults(
+>   defineProps<{
+>      width?: string
+>      height?: string
+>   }>(),
+>   {
+>      width: '100%',
+>      height: '360px'
+>   }
+> )
+> 
+> export interface Props {
+>   msg?: string
+>   labels?: string[]
+> }
+> 
+> const props = withDefaults(defineProps<Props>(), {
+>   msg: 'hello',
+>   labels: () => ['one', 'two']
+> })
+> ````
+>
+>  
+>
+>  图表的封装： 
+>
+> PieChart: 饼图图表
+>
+> RoseChart: 玫瑰图表
+>
+> LineChart: 折线图表
+
+
+
+
+
+![1692114012458](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1692114012458.png)
+
+1. vue2  初始化过程
+
+![1692114331399](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1692114331399.png)
+
+2. v-for 为什么要有key， 如果没有key会发生什么事？
+
+旧节点： [1,2,3]
+
+新节点： [1,2,3,4,5,6]
+
+没key的情况，1覆盖1， 2覆盖2 ......
+
+看源码
+
+3. 对内存泄露的理解。
+
+   程序所占用的内存，不能得到释放
+
+   ![1692115580920](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1692115580920.png)
+
+定时器没有及时清除 会造成内存泄露
+
+- 无用的定时器和回调函数
+- 闭包
+- DOM元素引用
+- 全局变量
+
+4. 谈谈对浏览器缓存的理解
+
+> 强缓存：在浏览器端自己能完成
+>
+> Cache-control: max-age=3600
+>
+> Expires: 过期时间
+>
+> 协商缓存：需要和服务端协同完成
+>
+> Etag/IF-none-Match
+>
+> Last-Modified/if-Modified-Since
+
+5. 前端存储方案
+
+localStorege/sessionstorage
+
+6. 如何找出页面上所有的a标签的href
+
+> `document.getElementsByTagName('a')`
+>
+> 返回为一个列表 aList  --->  它是伪数组（类数组）
+>
+> 转数组方法 Arrary.from(aList)
+
+7. 0.1 + 0.2 为什么不等于0.3？
+
+   01 - 小数如何转二进制    
+
+vite项目中使用eslint
+
+项目中使用eslint和prettier
+
+```shell
+npm i eslint prettier-eslint eslint-config-prettier --save-dev
+```
+
+
+
+
+
+违反单向数据流元组：
+
+自动化部署流程： Jenkins   依赖java
+
+dnf  --- 用于管理操作系统包的工具
+
+查看linux服务器上java的版本
+
+![1692675975409](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1692675975409.png)
+
+安装jenkins
+
+```
+sudo wget –O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+```
+
+
+
+删除jankins
+
+```
+systemctl stop jenkins.service
+rpm -e jenkins
+rpm -qa | grep jenkins      # 查看是否还有jenkins依赖，有就删除
+rm -rf /etc/sysconfig/jenkins.rpmsave
+rm -rf /var/cache/jenkins/
+rm -rf /var/lib/jenkins/
+rm -rf /var/log/jenkins
+rm -rf /usr/lib/jenkins
+```
+
+删除jdk
+
+```
+rpm -qa | grep jdk // 查看已安装的
+rpm -e --nodeps XXXX
+
+```
+
+```
+安装java11
+yum install fontconfig java-11-openjdk
+
+
+yun install jenkins // 不行, 使用下面语句安装
+
+dnf install jenkins
+
+systemctl start jenkins
+systemctl status jenkins
+systemctl enable jenkins
+```
+
+安装 ngnix 
+
+rtsp/rtmp --> 流媒体
+
+```
+dnf install nginx
+systemctl start nginx // 启动nginx
+systemctl status nginx // 查看启动状态
+systemctl enable nginx // 开机自启动
+```
+
+配置nginx:
+
+>进入到 /etc/nginx/nginx.conf
+>
+>将原本 user nginx 修改为 user root
+
+![1692760094596](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1692760094596.png)
+
+![1692760126455](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1692760126455.png)
+
+在服务器上安装git
+
+```
+git -version
+def install git
+```
 

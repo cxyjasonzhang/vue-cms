@@ -15,8 +15,7 @@
 
 <script setup lang="ts">
 import { ref, watch, PropType } from 'vue'
-import { HyForm } from '@/baseUI/form'
-import { types } from '@/baseUI/form'
+import { HyForm, types } from '@/baseUI/form'
 import { useSystemStore } from '@/store/main/system/system'
 
 const props = defineProps({

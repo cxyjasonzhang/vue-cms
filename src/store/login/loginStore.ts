@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
-import { LoginStateType } from '../type'
+import { type LoginStateType } from '../type'
 import { accountLoginRequest, requestUserInfoById, requestUserMenusByRoleId } from '@/service/login/login'
-import { LoginPayloadType } from '@/service/login/types'
+import { type LoginPayloadType } from '@/service/login/types'
 import router from '@/router/index'
 import LocalCache from '@/utils/cache'
 import { mapMenusToRoutes, mapMenusPermission } from '@/utils/map-menu'
@@ -37,7 +37,6 @@ export const useLoginStore = defineStore('login', {
       // 跳转到首页
       router.push('/main')
     },
-    phoneLoginAction() {},
     // 刷新页面时重新初始化pinia中的数据
     initLocalData() {
       const rootStore = useRootStore()

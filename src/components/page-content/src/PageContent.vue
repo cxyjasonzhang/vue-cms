@@ -93,7 +93,8 @@ const paginationInfo = ref({
   pagesize: 10
 })
 
-watch(paginationInfo, () => {
+watch(paginationInfo, (val) => {
+  console.log(val, '分页数据改变')
   getPageData()
 })
 
@@ -145,6 +146,8 @@ const pageCount = computed(() => systemStore.pageCountGetter(props.pageName) ?? 
 
 <style lang="less" scoped>
 .table-wrap {
-  padding: 40px 30px 0 40px;
+  padding: 40px 30px 80px 40px;
+  margin-top: 15px;
+  background-color: #fff;
 }
 </style>

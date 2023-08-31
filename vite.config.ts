@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import eslint from 'vite-plugin-eslint'
 import AutoImport from 'unplugin-auto-import/vite'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
@@ -11,6 +12,7 @@ import path from 'path'
 export default defineConfig({
   plugins: [
     vue(),
+    eslint(),
     AutoImport({
       resolvers: [
         ElementPlusResolver(),

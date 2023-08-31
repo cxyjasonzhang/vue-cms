@@ -30,7 +30,7 @@ class HYRequest {
     // 添加所有实例都有的拦截器
     this.instance.interceptors.request.use(
       (config) => {
-        const token = LocalCache.getCache('token')
+        const token: string | null = LocalCache.getCache('token')
         if (token) {
           config.headers.Authorization = `Bearer ${token}`
         }
@@ -67,6 +67,7 @@ class HYRequest {
       }
     )
   }
+
   // 可以自定义一个请求的拦截器
   request<T>(config: HYRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { IRootState } from './types'
+import type { IRootState } from './types'
 import { getPageList } from '@/service/main/system/system'
 
 export const useRootStore = defineStore('root', {

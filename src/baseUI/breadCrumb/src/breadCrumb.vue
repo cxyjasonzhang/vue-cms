@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { PropType } from 'vue'
-import { types } from '@/baseUI/breadCrumb'
+import type { types } from '@/baseUI/breadCrumb'
 defineProps({
   breadCrumbs: {
     type: Array as PropType<types.IBreadCrumb[]>

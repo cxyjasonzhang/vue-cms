@@ -4,5 +4,6 @@
   "printWidth": 110,
   "singleQuote": true,
   "trailingComma": "none",
+  "bracketSpacing": true,
   "semi": false
 }

@@ -60,7 +60,7 @@ const handleCollapse = (state: boolean) => {
       background-color: #fff;
     }
     .page-content {
-      background-color: #fff;
+      // background-color: #fff;
       margin-top: 10px;
     }
   }

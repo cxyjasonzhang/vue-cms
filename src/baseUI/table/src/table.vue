@@ -35,8 +35,8 @@
     <div class="footer" v-if="showFooter">
       <slot name="footer">
         <el-pagination
-          v-model:current-page="page.currentPage"
-          v-model:page-size="page.pagesize"
+          v-model:current-page="pageConfig.currentPage"
+          v-model:page-size="pageConfig.pagesize"
           :page-sizes="[10, 20, 30]"
           :small="false"
           layout="total, sizes, prev, pager, next, jumper"
@@ -50,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from 'vue'
+import { PropType, computed } from 'vue'
 import { ITableColumns } from '../type'
 const props = defineProps({
   tableData: {
@@ -89,6 +89,11 @@ const props = defineProps({
     type: Boolean,
     default: true
   }
+})
+
+// 避免直接使用props eslint会报错
+const pageConfig = computed(() => {
+  return props.page
 })
 
 const emits = defineEmits(['update:page'])

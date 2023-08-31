@@ -7,11 +7,13 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Card: typeof import('./src/components/card/src/Card.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCard: typeof import('element-plus/es')['ElCard']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
@@ -44,6 +46,8 @@ declare module 'vue' {
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTree: typeof import('element-plus/es')['ElTree']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    LineChart: typeof import('./src/components/page-chart/src/LineChart.vue')['default']
+    MapChart: typeof import('./src/components/page-chart/src/MapChart.vue')['default']
     NavHeader: typeof import('./src/components/nav-header/NavHeader.vue')['default']
     NavMenu: typeof import('./src/components/nav-menu/NavMenu.vue')['default']
     NavMenus: typeof import('./src/components/nav-menu/NavMenus.vue')['default']
@@ -51,7 +55,10 @@ declare module 'vue' {
     PageModal: typeof import('./src/components/page-modal/src/PageModal.vue')['default']
     PageModel: typeof import('./src/components/page-model/src/PageModel.vue')['default']
     PageSearch: typeof import('./src/components/page-search/src/PageSearch.vue')['default']
+    PieChart: typeof import('./src/components/page-chart/src/PieChart.vue')['default']
+    RoseChart: typeof import('./src/components/page-chart/src/RoseChart.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ZoomColumnChart: typeof import('./src/components/page-chart/src/ZoomColumnChart.vue')['default']
   }
 }

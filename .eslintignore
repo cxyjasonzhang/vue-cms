@@ -1,0 +1,7 @@
+build
+node_modules
+docs
+public/js
+src/assets
+public
+dist

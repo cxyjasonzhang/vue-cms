@@ -1,5 +1,5 @@
-import { RouteRecordRaw } from 'vue-router'
-import { IBreadCrumb } from '@/baseUI/breadCrumb/type'
+import type { RouteRecordRaw } from 'vue-router'
+import type { IBreadCrumb } from '@/baseUI/breadCrumb/type'
 
 export function loadLocalRoutes(): RouteRecordRaw[] {
   // 1. 先去加载默认的所有routes

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-search">
     <hy-form v-bind="searchConfig" v-model="formData">
       <template #footer>
         <div class="btn-group">
@@ -44,6 +44,10 @@ const handlerSearch = () => {
 </script>
 
 <style lang="less" scoped>
+.page-search {
+  background-color: #fff;
+  padding: 25px 0 25px 0;
+}
 .btn-group {
   text-align: right;
   margin: -10px 40px 0 0;
