@@ -18,10 +18,6 @@ export const rules = {
 }
 
 export const phoneLoginFormRules = {
-  phoneNumber: [
-    { required: true, message: '手机号号不能数为空', trigger: 'blur' }
-  ],
-  verificationCode: [
-    { required: true, message: '验证码不能为空', trigger: 'blur' }
-  ]
+  phoneNumber: [{ required: true, message: '手机号号不能数为空', trigger: 'blur' }],
+  verificationCode: [{ required: true, message: '验证码不能为空', trigger: 'blur' }]
 }

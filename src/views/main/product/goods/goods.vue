@@ -7,9 +7,9 @@
           style="width: 60px; height: 60px"
           :src="scope.row.imgUrl"
           :preview-src-list="[scope.row.imgUrl]"
-          z-index="99"
+          :z-index="99"
           fit="cover"
-          preview-teleported="true"
+          :preview-teleported="true"
         />
       </template>
       <template #oldPrice="scope">

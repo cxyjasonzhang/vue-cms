@@ -9,7 +9,7 @@
       <el-col :span="10">
         <card card-title="各地销量量统计">
           <!-- <hy-echart :options="options"></hy-echart> -->
-          <!-- <map-chart :list-data="addressGoodsSale"></map-chart> -->
+          <map-chart :list-data="addressGoodsSale"></map-chart>
         </card>
       </el-col>
       <el-col :span="7">

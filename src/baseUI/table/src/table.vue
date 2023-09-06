@@ -11,6 +11,7 @@
       style="width: 100%"
       border
       :show-overflow-tooltip="true"
+      v-loading="tableLoading"
       v-bind="childrenProps"
     >
       <el-table-column v-if="showSelectColumn" width="60" type="selection" align="center"></el-table-column>
@@ -50,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, computed } from 'vue'
+import { PropType, computed, watch } from 'vue'
 import { ITableColumns } from '../type'
 const props = defineProps({
   tableData: {
@@ -88,6 +89,10 @@ const props = defineProps({
   showFooter: {
     type: Boolean,
     default: true
+  },
+  tableLoading: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -95,6 +100,14 @@ const props = defineProps({
 const pageConfig = computed(() => {
   return props.page
 })
+
+watch(
+  props.tableData,
+  (nVal, oVal) => {
+    console.log(nVal, oVal, '数据修改')
+  },
+  { deep: true }
+)
 
 const emits = defineEmits(['update:page'])
 

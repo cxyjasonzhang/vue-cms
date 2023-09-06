@@ -7,6 +7,7 @@ export interface ISystemState {
   goodsCount: number
   menuList: any[]
   menuCount: number
+  isLoading: boolean
 }
 
 export type PageName = 'users' | 'role' | 'goods' | 'menu'

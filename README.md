@@ -625,11 +625,13 @@ npm i eslint prettier-eslint eslint-config-prettier --save-dev
 
 
 
-
+服务器远程连接密码
 
 违反单向数据流元组：
 
 自动化部署流程： Jenkins   依赖java
+
+持续集成与持续交互
 
 dnf  --- 用于管理操作系统包的工具
 

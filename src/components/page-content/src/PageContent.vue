@@ -3,6 +3,7 @@
     <hy-table
       v-bind="pageContentConfig"
       :tableData="tableData"
+      :table-loading="tableLoading"
       v-model:page="paginationInfo"
       :total-page="pageCount"
     >
@@ -49,6 +50,7 @@ import { usePermission } from '@/hooks/usePermission'
 import { useSystemStore } from '@/store/main/system/system'
 import { type PageName } from '@/store/main/system/types'
 import { ITableData } from '@/baseUI/table/type'
+import { storeToRefs } from 'pinia'
 
 const props = defineProps({
   pageContentConfig: {
@@ -65,21 +67,23 @@ const props = defineProps({
   }
 })
 // 其他特殊插槽
-const otherPropSlots = props.pageContentConfig.tableColumnsConfig.filter((item) => {
-  if (item.slotName) {
-    if (
-      item.slotName === 'status' ||
-      item.slotName === 'createTime' ||
-      item.slotName === 'updateTime' ||
-      item.slotName === 'handle'
-    ) {
-      return false
+const otherPropSlots = computed<any>(() => {
+  return props.pageContentConfig.tableColumnsConfig.filter((item) => {
+    if (item.slotName) {
+      if (
+        item.slotName === 'status' ||
+        item.slotName === 'createTime' ||
+        item.slotName === 'updateTime' ||
+        item.slotName === 'handle'
+      ) {
+        return false
+      } else {
+        return true
+      }
     } else {
-      return true
+      return false
     }
-  } else {
-    return false
-  }
+  })
 })
 
 // 获取按钮操作权限
@@ -111,6 +115,7 @@ const handleUpdate = (item: any) => {
 }
 
 const systemStore = useSystemStore()
+const { isLoading: tableLoading } = storeToRefs(systemStore)
 const handleDelete = (item: any) => {
   systemStore.deletePageItemAction({
     pageName: props.pageName,

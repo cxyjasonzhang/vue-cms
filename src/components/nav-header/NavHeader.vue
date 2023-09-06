@@ -46,7 +46,7 @@ const route = useRoute()
 const circleUrl = ref('https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png')
 const emits = defineEmits(['handleSwitch'])
 const isFold = ref(false)
-const clickSwitch = (state: boolean) => {
+const clickSwitch = (state: string | number | boolean) => {
   emits('handleSwitch', state)
 }
 

@@ -44,21 +44,19 @@ declare module 'vue' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
-    ElTree: typeof import('element-plus/es')['ElTree']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     LineChart: typeof import('./src/components/page-chart/src/LineChart.vue')['default']
-    MapChart: typeof import('./src/components/page-chart/src/MapChart.vue')['default']
     NavHeader: typeof import('./src/components/nav-header/NavHeader.vue')['default']
     NavMenu: typeof import('./src/components/nav-menu/NavMenu.vue')['default']
-    NavMenus: typeof import('./src/components/nav-menu/NavMenus.vue')['default']
     PageContent: typeof import('./src/components/page-content/src/PageContent.vue')['default']
     PageModal: typeof import('./src/components/page-modal/src/PageModal.vue')['default']
-    PageModel: typeof import('./src/components/page-model/src/PageModel.vue')['default']
     PageSearch: typeof import('./src/components/page-search/src/PageSearch.vue')['default']
     PieChart: typeof import('./src/components/page-chart/src/PieChart.vue')['default']
     RoseChart: typeof import('./src/components/page-chart/src/RoseChart.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ZoomColumnChart: typeof import('./src/components/page-chart/src/ZoomColumnChart.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

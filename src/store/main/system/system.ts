@@ -12,7 +12,8 @@ export const useSystemStore = defineStore('system', {
       goodsList: [],
       goodsCount: 0,
       menuList: [],
-      menuCount: 0
+      menuCount: 0,
+      isLoading: false
     }
   },
 
@@ -49,6 +50,7 @@ export const useSystemStore = defineStore('system', {
 
   actions: {
     async getPageListAction(payload: IListPayLoad) {
+      this.isLoading = true
       let requestUrl = ''
       switch (payload.pageName) {
         case 'users':
@@ -64,6 +66,7 @@ export const useSystemStore = defineStore('system', {
           requestUrl = '/menu/list'
       }
       const resultData = await getPageList(requestUrl, payload.queryInfo)
+      this.isLoading = false
       this[`${payload.pageName}List`] = resultData.data.list
       this[`${payload.pageName}Count`] = resultData.data.totalCount
     },

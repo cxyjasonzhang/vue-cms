@@ -38,12 +38,13 @@
 <script lang="ts" setup>
 import loginAccount, { ExposeFuncType } from '@/views/Login/cpns/login-account.vue'
 import loginPhone from '@/views/Login/cpns/login-phone.vue'
+import type { CheckboxValueType, TabPaneName } from 'element-plus'
 import { ref, onMounted } from 'vue'
 import LocalCache from '@/utils/cache'
 
-const currentTab = ref<string>('account')
+const currentTab = ref<TabPaneName>('account')
 
-const changeTab = (name: string) => {
+const changeTab = (name: TabPaneName) => {
   currentTab.value = name
 }
 
@@ -58,7 +59,7 @@ onMounted(() => {
   }
 })
 // 记住密码
-const rememberPassword = (e: boolean) => {
+const rememberPassword = (e: CheckboxValueType) => {
   if (e) {
     if (!account.value?.countLoginForm.password && !account.value?.countLoginForm.account) return
     account.value?.rememberPassword()
