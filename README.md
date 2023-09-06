@@ -625,7 +625,7 @@ npm i eslint prettier-eslint eslint-config-prettier --save-dev
 
 
 
-服务器远程连接密码
+服务器远程连接密码： 1208+awdA
 
 违反单向数据流元组：
 
@@ -710,5 +710,90 @@ systemctl enable nginx // 开机自启动
 ```
 git -version
 def install git
+```
+
+
+
+在jenkins中构建项目时报以下错误: 以下为构建流程
+
+```js
+Started by user unknown or anonymous
+Running as SYSTEM
+Building in workspace /var/lib/jenkins/workspace/mall_cms
+The recommended git tool is: NONE
+using credential d9584de7-0aa1-460c-acbd-d221eb43f974
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/mall_cms/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/cxyjasonzhang/vue-cms # timeout=10
+Fetching upstream changes from https://github.com/cxyjasonzhang/vue-cms
+ > git --version # timeout=10
+ > git --version # 'git version 2.27.0'
+using GIT_ASKPASS to set credentials 
+ > git fetch --tags --force --progress -- https://github.com/cxyjasonzhang/vue-cms +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 5acaf26ccdc0195a45c392917340a16fee2d525a (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 5acaf26ccdc0195a45c392917340a16fee2d525a # timeout=10
+Commit message: "fix: 修改npm run build执行脚本"
+ > git rev-list --no-walk 0425f89db8b8ef018d8dd4783f34da71a23da34d # timeout=10
+[mall_cms] $ /bin/sh -xe /tmp/jenkins12300207751645754333.sh
++ pwd
+/var/lib/jenkins/workspace/mall_cms
++ node -v
+v16.6.0
++ npm -v
+7.19.1
++ npm install
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'execa@7.1.1',
+npm WARN EBADENGINE   required: { node: '^14.18.0 || ^16.14.0 || >=18.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.6.0', npm: '7.19.1' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'rollup@3.26.3',
+npm WARN EBADENGINE   required: { node: '>=14.18.0', npm: '>=8.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.6.0', npm: '7.19.1' }
+npm WARN EBADENGINE }
+
+> vue-app-cms@0.0.0 prepare
+> husky install
+
+husky - Git hooks installed
+
+up to date, audited 658 packages in 2s
+
+168 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+// 执行打包命令时开始报错
++ npm run build
+
+> vue-app-cms@0.0.0 build
+> vue-tsc --skipLibCheck && vite build
+
+
+<--- Last few GCs --->
+
+[443025:0x5208440]    37754 ms: Mark-sweep (reduce) 858.1 (875.5) -> 856.9 (874.7) MB, 1510.1 / 0.0 ms  (average mu = 0.097, current mu = 0.007) allocation failure scavenge might not succeed
+
+
+<--- JS stacktrace --->
+
+FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+ 1: 0xafcdf0 node::Abort() [node]
+ 2: 0xa1814d node::FatalError(char const*, char const*) [node]
+ 3: 0xce5a2e v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, bool) [node]
+ 4: 0xce5da7 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, bool) [node]
+ 5: 0xeaf785  [node]
+ 6: 0xeb0274  [node]
+ 7: 0xebe6e7 v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [node]
+ 8: 0xec1a9c v8::internal::Heap::AllocateRawWithRetryOrFailSlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [node]
+ 9: 0xe843bc v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationType, v8::internal::AllocationOrigin) [node]
+10: 0x11f1226 v8::internal::Runtime_AllocateInYoungGeneration(int, unsigned long*, v8::internal::Isolate*) [node]
+11: 0x15c7fb9  [node]
+sh: line 1: 443025 Aborted                 (core dumped) vue-tsc --skipLibCheck
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE
 ```
 
