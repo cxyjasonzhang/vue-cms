@@ -1,4 +1,4 @@
-export type FormType = 'input' | 'select' | 'password' | 'datePicker'
+export type FormType = 'input' | 'select' | 'password' | 'datePicker' | 'textarea'
 
 export interface IFormItem {
   field: string

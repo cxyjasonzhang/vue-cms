@@ -26,7 +26,6 @@ import NavHeader from '@/components/nav-header/NavHeader.vue'
 import { ref } from 'vue'
 const isCollapse = ref(false)
 const handleCollapse = (state: boolean) => {
-  console.log(111)
   isCollapse.value = state
 }
 </script>
@@ -55,6 +54,9 @@ const handleCollapse = (state: boolean) => {
           color: #fff;
         }
       }
+    }
+    .page-aside::-webkit-scrollbar {
+      display: none; /* Chrome Safari */
     }
     .page-header {
       background-color: #fff;

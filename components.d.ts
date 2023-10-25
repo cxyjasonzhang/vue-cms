@@ -45,6 +45,7 @@ declare module 'vue' {
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     LineChart: typeof import('./src/components/page-chart/src/LineChart.vue')['default']
+    Message: typeof import('./src/components/message/src/message.vue')['default']
     NavHeader: typeof import('./src/components/nav-header/NavHeader.vue')['default']
     NavMenu: typeof import('./src/components/nav-menu/NavMenu.vue')['default']
     PageContent: typeof import('./src/components/page-content/src/PageContent.vue')['default']
@@ -54,6 +55,7 @@ declare module 'vue' {
     RoseChart: typeof import('./src/components/page-chart/src/RoseChart.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SvgIcon: typeof import('./src/components/svg-icon/src/SvgIcon.vue')['default']
     ZoomColumnChart: typeof import('./src/components/page-chart/src/ZoomColumnChart.vue')['default']
   }
   export interface ComponentCustomProperties {

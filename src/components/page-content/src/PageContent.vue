@@ -27,7 +27,7 @@
         <el-button type="primary" link :icon="Edit" v-if="isUpdate" @click="handleUpdate(scope.row)"
           >编辑</el-button
         >
-        <el-button type="primary" link :icon="Delete" v-if="isDelete" @click="handleDelete(scope.row)"
+        <el-button type="primary" link :icon="Delete" v-if="isDelete" @click="showHandleDelete(scope.row)"
           >删除</el-button
         >
       </template>
@@ -38,6 +38,18 @@
         </template>
       </template>
     </hy-table>
+    <el-dialog v-model="showDeleteDialog" title="提示" width="30%" align-center>
+      <div class="dialog-content">
+        <el-icon class="icon-style"><WarningFilled /></el-icon>
+        <span>是否删除该条数据！</span>
+      </div>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="showDeleteDialog = false"> 取消 </el-button>
+          <el-button type="primary" @click="confirmDelete"> 确定 </el-button>
+        </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -51,6 +63,8 @@ import { useSystemStore } from '@/store/main/system/system'
 import { type PageName } from '@/store/main/system/types'
 import { ITableData } from '@/baseUI/table/type'
 import { storeToRefs } from 'pinia'
+
+const showDeleteDialog = ref<boolean>(false)
 
 const props = defineProps({
   pageContentConfig: {
@@ -115,11 +129,20 @@ const handleUpdate = (item: any) => {
 }
 
 const systemStore = useSystemStore()
+let currentGood: any = null
 const { isLoading: tableLoading } = storeToRefs(systemStore)
-const handleDelete = (item: any) => {
+
+const showHandleDelete = (item: any) => {
+  currentGood = item
+  // 增加删除提示
+  showDeleteDialog.value = true
+}
+
+const confirmDelete = () => {
+  showDeleteDialog.value = false
   systemStore.deletePageItemAction({
     pageName: props.pageName,
-    id: item.id
+    id: currentGood.id
   })
 }
 
@@ -154,5 +177,18 @@ const pageCount = computed(() => systemStore.pageCountGetter(props.pageName) ?? 
   padding: 40px 30px 80px 40px;
   margin-top: 15px;
   background-color: #fff;
+}
+.dialog-content {
+  display: flex;
+  align-items: center;
+  .icon-style {
+    font-size: 25px;
+    margin-right: 10px;
+    color: #ffba00;
+  }
+}
+
+:deep(.el-dialog__body) {
+  padding: 20px 30px;
 }
 </style>

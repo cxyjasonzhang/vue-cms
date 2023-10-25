@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ISystemState, IListPayLoad, IDeletePayLoad } from './types'
+import { ISystemState, IListPayLoad, IDeletePayLoad, PageName } from './types'
 import { getPageList, deletePageData, createPageData, updatePageData } from '@/service/main/system/system'
 
 export const useSystemStore = defineStore('system', {
@@ -13,37 +13,32 @@ export const useSystemStore = defineStore('system', {
       goodsCount: 0,
       menuList: [],
       menuCount: 0,
+      departmentList: [],
+      departmentCount: 0,
       isLoading: false
     }
   },
 
   getters: {
     pageListGetter() {
-      return (pageName: string) => {
-        switch (pageName) {
-          case 'users':
-            return this.usersList
-          case 'role':
-            return this.roleList
-          case 'goods':
-            return this.goodsList
-          case 'menu':
-            return this.menuList
-        }
+      return (pageName: PageName) => {
+        return this[`${pageName}List`]
       }
     },
     pageCountGetter() {
-      return (pageName: string) => {
-        switch (pageName) {
-          case 'users':
-            return this.usersCount
-          case 'role':
-            return this.roleCount
-          case 'goods':
-            return this.goodsCount
-          case 'menu':
-            return this.menuCount
-        }
+      return (pageName: PageName) => {
+        // switch (pageName) {
+        //   case 'users':
+        //     return this.usersCount
+        //   case 'role':
+        //     return this.roleCount
+        //   case 'goods':
+        //     return this.goodsCount
+        //   case 'menu':
+        //     return this.menuCount
+        // }
+        console.log(this[`${pageName}Count`], '数量')
+        return this[`${pageName}Count`]
       }
     }
   },
@@ -52,19 +47,24 @@ export const useSystemStore = defineStore('system', {
     async getPageListAction(payload: IListPayLoad) {
       this.isLoading = true
       let requestUrl = ''
-      switch (payload.pageName) {
-        case 'users':
-          requestUrl = '/users/list'
-          break
-        case 'role':
-          requestUrl = '/role/list'
-          break
-        case 'goods':
-          requestUrl = '/goods/list'
-          break
-        case 'menu':
-          requestUrl = '/menu/list'
-      }
+      // switch (payload.pageName) {
+      //   case 'users':
+      //     requestUrl = '/users/list'
+      //     break
+      //   case 'role':
+      //     requestUrl = '/role/list'
+      //     break
+      //   case 'goods':
+      //     requestUrl = '/goods/list'
+      //     break
+      //   case 'menu':
+      //     requestUrl = '/menu/list'
+      //     break
+      //   case 'department':
+      //     requestUrl = '/department/list'
+      //     break
+      // }
+      requestUrl = '/' + payload.pageName + '/list'
       const resultData = await getPageList(requestUrl, payload.queryInfo)
       this.isLoading = false
       this[`${payload.pageName}List`] = resultData.data.list
@@ -84,6 +84,9 @@ export const useSystemStore = defineStore('system', {
           break
         case 'menu':
           deleteUrl = `/menu/${payload.id}`
+          break
+        case 'department':
+          deleteUrl = `/department/${payload.id}`
           break
       }
       const resultData = await deletePageData(deleteUrl)

@@ -416,6 +416,13 @@ defineProps({
 
 默认选中：menu列表   defauli-active 的值如何设置？
 
+```
+// 破坏了单向数据流
+<el-input :placeholder="formItem.placeholder" v-model="modelValue[`${formItem.field}`]" />
+```
+
+Unexpected mutation of "modelValue" prop
+
 
 
 单向数据流原则：
@@ -796,4 +803,45 @@ sh: line 1: 443025 Aborted                 (core dumped) vue-tsc --skipLibCheck
 Build step 'Execute shell' marked build as failure
 Finished: FAILURE
 ```
+
+build命令从 "build": "vue-tsc --skipLibCheck && vite build", 改为
+
+![1694002441440](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1694002441440.png)
+
+
+
+另外一种方案， 不知可不可行
+
+![1694002531155](C:\Users\12080\AppData\Roaming\Typora\typora-user-images\1694002531155.png)
+
+关于滚动条的隐藏
+
+```css
+/* Firefox浏览器 */
+scrollbar-width: none; /* Firefox */
+/* IE浏览器 */
+-ms-overflow-style: none; /* IE 10+ */
+/* Chrome和Safari浏览器 */
+::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}
+```
+
+svg如何使用？
+
+
+
+如何使用VueUse第三方库？
+
+> 首先在项目中安装 `npm i @vueuse/core`
+>
+> import { xxx } form 'vueuse/core'
+
+.eslintrc-auto-import.json 该文件的作用？
+
+> `.eslintrc-auto-import.json` 文件是一个ESLint配置文件，用于自动导入缺失的模块。该文件的作用是在您使用未导入的模块时，自动将其导入到您的代码中。这个文件通常是由 `unplugin-auto-import` 插件生成的，该插件可以自动为您的代码添加缺失的模块导入语句
+
+unplugin-auto-import 插件是什么？
+
+> 它可以帮助您自动导入缺失的模块。该插件可以为您的代码添加缺失的模块导入语句，从而提高代码的可读性和可维护性。
 

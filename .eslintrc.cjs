@@ -5,6 +5,7 @@ module.exports = {
   },
   extends: [
     'eslint-config-prettier',
+    './.eslintrc-auto-import.json',
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:vue/vue3-essential',
@@ -21,6 +22,7 @@ module.exports = {
       }
     }
   ],
+  parser: 'vue-eslint-parser',
   parserOptions: {
     ecmaVersion: 'latest',
     parser: '@typescript-eslint/parser',

@@ -7,6 +7,10 @@
       </div>
     </div>
     <div class="header-right">
+      <div @click="toggle">
+        <!-- <span @click="toggle">{{ isFullscreen ? '取消全屏' : '全屏' }}</span> -->
+        <svg-icon :icon-class="isFullscreen ? 'exit-fullscreen' : 'fullscreen'" />
+      </div>
       <el-dropdown>
         <span class="el-dropdown-link dropdown">
           <el-avatar :size="30" :src="circleUrl" />
@@ -36,10 +40,13 @@
 
 <script setup lang="ts">
 import { breadCrumb } from '@/baseUI/breadCrumb'
+import SvgIcon from '@/components/svg-icon'
 import { ref, computed } from 'vue'
 import { useLoginStore } from '@/store/login/loginStore'
 import { useRoute } from 'vue-router'
 import { pathMapBreadCrumb } from '@/utils/map-menu'
+
+const { isFullscreen, toggle } = useFullscreen()
 
 const loginStore = useLoginStore()
 const route = useRoute()
@@ -73,14 +80,19 @@ const handleExitClick = () => {
       margin-left: 15px;
     }
   }
-  .dropdown {
+  .header-right {
     display: flex;
     align-items: center;
-    .userName {
-      margin-left: 5px;
-    }
-    .dropdown-item {
-      vertical-align: center;
+    .dropdown {
+      margin-left: 20px;
+      display: flex;
+      align-items: center;
+      .userName {
+        margin-left: 5px;
+      }
+      .dropdown-item {
+        vertical-align: center;
+      }
     }
   }
 }

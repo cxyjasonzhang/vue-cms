@@ -7,10 +7,12 @@ export interface ISystemState {
   goodsCount: number
   menuList: any[]
   menuCount: number
+  departmentList: any[]
+  departmentCount: number
   isLoading: boolean
 }
 
-export type PageName = 'users' | 'role' | 'goods' | 'menu'
+export type PageName = 'users' | 'role' | 'goods' | 'menu' | 'department'
 export interface IListPayLoad {
   pageName: PageName
   queryInfo: {

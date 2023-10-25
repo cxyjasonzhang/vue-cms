@@ -14,12 +14,22 @@ export default defineConfig({
     vue(),
     eslint(),
     AutoImport({
+      // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
+      imports: ['@vueuse/core'],
       resolvers: [
         ElementPlusResolver(),
         IconsResolver({
           prefix: 'Icon'
         })
-      ]
+      ],
+      eslintrc: {
+        enabled: false,
+        filepath: './.eslintrc-auto-import.json',
+        globalsPropValue: true
+      },
+      vueTemplate: true,
+      // 配置文件生成位置(false:关闭自动生成)
+      dts: false
     }),
     Components({
       resolvers: [
